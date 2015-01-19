@@ -8,10 +8,10 @@ from Group import GroupTable
 from Master import MasterTable
 from Personal_Notes import NoteTable
 from PhoneNumber import PhoneTable
-from Search import SearchTable
+from Recall import RecallTable
 from Address import AddressTable
 
-db_name = "yellowpagersdb"
+db_name = "addressbookdb"
 
 
 def p_menu():
@@ -31,15 +31,15 @@ def p_menu():
           '12 to delete a personal note\n'
           '13 to insert phone number\n'
           '14 to delete phone number\n'
-          '15 to insert a search (should prolly delete this one)\n'
-          '16 to delete a past search\n'
+          '15 to insert a recall (should prolly delete this one)\n'
+          '16 to delete a past recall\n'
           '17 to print all the emails\n'
           '18 to print all the favorites\n'
           '19 to print all the groups\n'
           '20 to print all the master address books\n'
           '21 to print all the personal notes\n'
           '22 to print all the phone numbers\n'
-          '23 to print all the past searches (not working yet)\n'
+          '23 to print all the past recalles (not working yet)\n'
           '24 to print all the addresses\n'
           '25 to insert an address\n'
           '26 to delete an address\n'
@@ -131,16 +131,16 @@ def d_phone():
     PhoneTable(db_name).delete_phone()
 
 
-def p_search():
-    SearchTable(db_name).print_search_result()
+def p_recall():
+    RecallTable(db_name).print_recall_result()
 
 
-def i_search():
-    SearchTable(db_name).insert_search()
+def i_recall():
+    RecallTable(db_name).insert_recall()
 
 
-def d_search():
-    SearchTable(db_name).delete_search()
+def d_recall():
+    RecallTable(db_name).delete_recall()
 
 
 def p_address():
@@ -196,9 +196,9 @@ if x == 13:
 if x == 14:
     d_phone()
 if x == 15:
-    i_search()
+    i_recall()
 if x == 16:
-    d_search()
+    d_recall()
 if x == 17:
     p_email()
 if x == 18:
@@ -212,7 +212,7 @@ if x == 21:
 if x == 22:
     p_phone()
 if x == 23:
-    p_search()
+    p_recall()
 if x == 24:
     p_address()
 if x == 25:
