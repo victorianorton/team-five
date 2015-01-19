@@ -5,8 +5,6 @@ import sqlite3
 
 
 class AddressBookDB(object):
-    db_name = "yellowpagersdb"
-
     def __init__(self, db):
         self.db_name = db
 
@@ -17,12 +15,11 @@ class AddressBookDB(object):
             conn.cursor()
 
         if db_new:
-            return 'Need to create a schema'
+            print 'Need to create a schema\n'
         else:
-            return 'Database already exists'
+            print 'Database already exists\n'
 
     def close_conn(self):
         with sqlite3.connect(self.db_name) as conn:
                 conn.cursor()
-        conn.commit()
         conn.close()
