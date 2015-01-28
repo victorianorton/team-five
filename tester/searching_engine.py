@@ -20,10 +20,10 @@ def show_address_book():
         print_addresses(conn, uid)
 
 
-def by_email(email):
+def by_email(user_in):
     with sqlite3.connect(db_name) as conn:
         conn.cursor()
-    cur_email = conn.execute('select * from email where email = ?', (email))
+    cur_email = conn.execute('select * from email where email = ? ', (user_in))
     conn.commit()
     for row in cur_email:
         uid = row[0]
@@ -35,10 +35,10 @@ def by_email(email):
     return uid
 
 
-def by_name(fname, lname):
+def by_name(user_in):
     with sqlite3.connect(db_name) as conn:
         conn.cursor()
-    cur_people = conn.execute('select * from people where fname = ? and lname = ?', (fname, lname,))
+    cur_people = conn.execute('select * from people where fname = ? or lname = ?', (user_in, user_in,))
     conn.commit()
     for row in cur_people:
         uid = row[0]
@@ -51,13 +51,13 @@ def by_name(fname, lname):
 
 
 
-def by_addresses(address_number, address_prefix, address_line, address_postfix, city, state):
+def by_addresses(user_in):
     with sqlite3.connect(db_name) as conn:
         conn.cursor()
-    cur_addresses = conn.execute('select * from addresses where address_number = ? and '
-                                 'address_prefix = ? and address_line = ? and address_postfix = ?'
-                                 'and city = ? and state = ?',
-                                 (address_number, address_prefix,address_line, address_postfix, city, state,))
+    cur_addresses = conn.execute('select * from addresses where address_line_one = ? or '
+                                 'address_line_two = ? or city = ? or state = ?'
+                                 'or zip = ? ',
+                                 (user_in, user_in,user_in, user_in, user_in,))
     conn.commit()
     for row in cur_addresses:
         uid = row[0]
@@ -70,10 +70,10 @@ def by_addresses(address_number, address_prefix, address_line, address_postfix, 
 
 
 
-def by_phone_numbers(pn):
+def by_phone_numbers(user_in):
     with sqlite3.connect(db_name) as conn:
         conn.cursor()
-    cur_phone_numbers = conn.execute('SELECT * from phone_numbers WHERE phone_number = ? ', (pn,))
+    cur_phone_numbers = conn.execute('SELECT * from phone_numbers WHERE phone_number = ? ', (user_in,))
     for row in cur_phone_numbers:
         uid = row[0]
         print "uid = ", uid
