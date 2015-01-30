@@ -99,6 +99,28 @@ class AddressBookDB:
         self.cur.execute('select fname, lname from people order by fname asc')
         self.conn.commit()
 
+
+    def search_name_email(self):
+        self.cur.execute('select p.unique_id, p.fname, p.lname, e.email, e.label '
+                         'from people p join email e using (unique_id)')
+        self.conn.commit()
+
+    def search_name_address(self):
+        self.cur.execute('select p.unique_id, p.fname, p.lname, a.address_line_one, '
+                         'a.address_line_two, a.city, a.state, a.zip, a.label '
+                         'from people p join addresses a using (unique_id)')
+        self.conn.commit()
+
+    def search_name_phone(self):
+        self.cur.execute('select p.unique_id, p.fname, p.lname, pn.phone_number, pn.label '
+                         'from people p join phone_numbers using (unique_id)')
+        self.conn.commit()
+
+
+
+
+
+
     def close(self):
         self.conn.close()
 
