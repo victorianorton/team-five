@@ -1,6 +1,8 @@
+#contribtion by: https://github.com/buchs/pycheck/blob/master/MultiListboxRead.py
 
 from tkinter import *
 class MultiListbox(Frame):
+    '''MultiListbox made by Labels as table header and Listbox as table colomns'''
     def __init__(self, master, lists):
         Frame.__init__(self, master)
         self.lists = []
@@ -86,7 +88,7 @@ class MultiListbox(Frame):
         self.item_selected=[first,]+self.get(first)
         for l in self.lists:
             l.selection_set(first, last)
-    def not_focus(self):
+    def not_focus(self):#suhail
         for l in self.lists:
             l['takefocus']=False
     
